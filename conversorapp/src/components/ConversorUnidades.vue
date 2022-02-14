@@ -56,6 +56,48 @@ export default {
          } else if (fromUnit=="Horas" && resultUnit =="Minutos"){
              return value*60;    
         }
+      },
+      tologitud: function(value,fromUnit,resultUnit){
+        if(fromUnit=="mm" && resultUnit=="mm"){
+             return value;
+         } else if (fromUnit=="mm" && resultUnit =="cm"){
+             return value/10;
+         } else if (fromUnit=="mm" && resultUnit =="m"){
+             return value*0.001;
+         } else if (fromUnit=="cm" && resultUnit =="cm"){
+             return value;
+         } else if (fromUnit=="cm" && resultUnit =="mm"){
+             return value*10;
+         } else if (fromUnit=="cm" && resultUnit =="m"){
+             return value/100;
+         } else if (fromUnit=="m" && resultUnit =="m"){
+             return value;
+         } else if (fromUnit=="m" && resultUnit =="mm"){
+             return value/0.0010000;
+         } else if (fromUnit=="m" && resultUnit =="cm"){
+             return value*100;    
+        }
+      },
+      toGigabytes: function(value,fromUnit,resultUnit){ 
+        if(fromUnit=="Kilobytes" && resultUnit=="Kilobytes"){
+             return value;
+         } else if (fromUnit=="Kilobytes" && resultUnit =="Megabytes"){
+             return value/1024;
+         } else if (fromUnit=="Kilobytes" && resultUnit =="Gigabytes"){
+             return (value/1024)/1024;
+         } else if (fromUnit=="Megabytes" && resultUnit =="Megabytes"){
+             return value;
+         } else if (fromUnit=="Megabytes" && resultUnit =="Kilobytes"){
+             return value*1024;
+         } else if (fromUnit=="Megabytes" && resultUnit =="Gigabytes"){
+             return value/1024;
+         } else if (fromUnit=="Gigabytes" && resultUnit =="Gigabytes"){
+             return value;
+         } else if (fromUnit=="Gigabytes" && resultUnit =="Kilobytes"){
+             return (value*1024)*1024;
+         } else if (fromUnit=="Gigabytes" && resultUnit =="Megabytes"){
+             return value*1024;    
+        }
       }
   },
 
@@ -80,6 +122,36 @@ export default {
                             return "...";
                         }
                 }
+                case("Longitud"): {
+                   
+                        let valuelon= this.tologitud(value,this.fromUnit,this.resultUnit); 
+                        switch(this.resultUnit){
+                        case("mm"):
+                            return parseFloat((valuelon).toFixed(10));   
+                        case("cm"):
+                            return parseFloat((valuelon).toFixed(10));
+                        case("m"):
+                            return parseFloat((valuelon).toFixed(10));
+                        default:
+                            console.log();
+                            return "...";
+                        }
+                 }
+                 case("Almacenamiento"): {
+                        let valueAlma= this.toGigabytes(value,this.fromUnit,this.resultUnit);
+                        switch(this.resultUnit){
+                        case("Kilobytes"):
+                            return parseFloat((valueAlma).toFixed(10));   
+                        case("Megabytes"):
+                            return parseFloat((valueAlma).toFixed(10));
+                        case("Gigabytes"):
+                            return parseFloat((valueAlma).toFixed(10));
+                        default:
+                            console.log("");
+                            return "...";
+                        }
+                  }
+                  
               }
             }      
             return "...";  

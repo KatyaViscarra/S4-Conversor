@@ -98,7 +98,50 @@ export default {
          } else if (fromUnit=="Gigabytes" && resultUnit =="Megabytes"){
              return value*1024;    
         }
+      },
+      toDolar: function(value,fromUnit,resultUnit){
+         if(fromUnit=="Colones" && resultUnit=="Colones"){
+             return value;
+         } else if (fromUnit=="Colones" && resultUnit =="Dolares"){
+             return value*0.11;
+         } else if (fromUnit=="Colones" && resultUnit =="Euros"){
+             return value*0.10;
+         } else if (fromUnit=="Dolares" && resultUnit =="Colones"){
+             return value*8.79;
+         } else if (fromUnit=="Dolares" && resultUnit =="Dolares"){
+             return value;
+         } else if (fromUnit=="Dolares" && resultUnit =="Euros"){
+             return value*0.88206831;
+         } else if (fromUnit=="Euros" && resultUnit =="Colones"){
+             return value*9.97;
+         } else if (fromUnit=="Euros" && resultUnit =="Dolares"){
+             return value*1.14;
+         } else if (fromUnit=="Euros" && resultUnit =="Euros"){
+             return value;    
+        }
+      },
+        toMasa: function(value,fromUnit,resultUnit){
+         if(fromUnit=="kg" && resultUnit=="kg"){
+             return value;
+         } else if (fromUnit=="kg" && resultUnit =="g"){
+             return value*1000;
+         } else if (fromUnit=="kg" && resultUnit =="mg"){
+             return value*1000000;
+         } else if (fromUnit=="g" && resultUnit =="kg"){
+             return value/1000;
+         } else if (fromUnit=="g" && resultUnit =="g"){
+             return value;
+         } else if (fromUnit=="g" && resultUnit =="mg"){
+             return value*1000;
+         } else if (fromUnit=="mg" && resultUnit =="kg"){
+             return value/1000000;
+         } else if (fromUnit=="mg" && resultUnit =="g"){
+             return value/1000;
+         } else if (fromUnit=="mg" && resultUnit =="mg"){
+             return value;    
+        }
       }
+
   },
 
 
@@ -151,7 +194,38 @@ export default {
                             return "...";
                         }
                   }
-                  
+                  case("Monedas"): {
+                    //Conversiones con tiempo
+                        let valueInMonedas = this.toDolar(value,this.fromUnit,this.resultUnit);  // we use "minutes" as an intermediary unit
+                        switch(this.resultUnit){
+                        case("Colones"):
+                            return parseFloat((valueInMonedas).toFixed(2));   // limit to 5 decimals and parseFloat() it to remove redundant 0s
+                        case("Dolares"):
+                            return parseFloat((valueInMonedas).toFixed(2));
+                        case("Euros"):
+                            return parseFloat((valueInMonedas).toFixed(2));
+                        default:
+                            console.log("Error detectado - unidad no seleccionada");
+                    }        return "...";
+                 }
+   
+                  /* ----------------------------*/
+                  case("Masa"): {
+                    //Conversiones con Masa
+                        let valueInMasa = this.toMasa(value,this.fromUnit,this.resultUnit);  // we use "minutes" as an intermediary unit
+                        switch(this.resultUnit){
+                        case("kg"):
+                            return parseFloat((valueInMasa).toFixed(8));   // limit to 5 decimals and parseFloat() it to remove redundant 0s
+                        case("g"):
+                            return parseFloat((valueInMasa).toFixed(3));
+                        case("mg"):
+                            return parseFloat((valueInMasa).toFixed(3));
+                        default:
+                            console.log("Error detectado - unidad no seleccionada");
+                            return "...";
+                        }
+                  }
+
               }
             }      
             return "...";  

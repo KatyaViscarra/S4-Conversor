@@ -24,8 +24,8 @@ export default {
       return{
           cantidades: [  //Aqui se encuentran todas las unidades a utilizar con sus conversiones
            {name:"Longitud",id:0, units:["mm","cm","m"]},
-           {name:"Monedas",id:1, units:[""]},
-           {name:"Masa",id:2, units:[""]},
+           {name:"Monedas",id:1, units:["Colones","Dolares","Euros  "]},
+           {name:"Masa",id:2, units:["kg","g","mg"]},
            {name:"Tiempo",id:3, units:["Segundos","Minutos","Horas"]},
            {name:"Almacenamiento",id:4, units:["Kilobytes","Megabytes","Gigabytes"]}
           ]
